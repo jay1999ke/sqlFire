@@ -1,3 +1,9 @@
+Airport:
++	airport_id
+    airport_name
+	gate_cost
+	total_gates
+
 Airline:
 +	airline_id
 	name
@@ -5,24 +11,17 @@ Airline:
 	balance
 	base_airport_id
 
-Airport:
-+	airport_id
-	name
-	gate_cost
-	total_gates
-
-Hubs:
-+	airline_id
-+	hub_airport_id
-	no_of_gates
-
 Aircraft:
-+	aircraft_id
-	airline_id
++   aircraft_id
 	company
 	model
 	cost
-	seats	
+	seats
+
+Fleet:
++   fleet_id
+    aircraft_id
++   airline_id
 
 Booked_gates:
 +	airline_id
@@ -31,8 +30,7 @@ Booked_gates:
 
 Routes:
 +	flight_no
-	airline_id
-	base_airport_id
++	airline_id
 	destination_airport_id
 	aircraft_id
 	price
