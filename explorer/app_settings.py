@@ -42,6 +42,8 @@ EXPLORER_SCHEMA_INCLUDE_TABLE_PREFIXES = getattr(settings, 'EXPLORER_SCHEMA_INCL
                                                                                                       'bookedgate',
                                                                                                       'airline',
                                                                                                       'fleet',
+                                                                                                      "customer",
+                                                                                                      "passenger",
                                                                                                       "airport","route"))
 EXPLORER_SCHEMA_INCLUDE_VIEWS = getattr(settings, 'EXPLORER_SCHEMA_INCLUDE_VIEWS', False)
 

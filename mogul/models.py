@@ -74,7 +74,7 @@ Fleet:
 
 """
 class Fleet(models.Model):
-    fleet_id = models.IntegerField()
+    fleet_id = models.IntegerField(primary_key=True)
     aircraft = models.ForeignKey(Aircraft,on_delete=models.CASCADE)
     airline = models.ForeignKey(Airline,on_delete=models.CASCADE)
 
@@ -114,15 +114,55 @@ Routes:
 """
 
 class Route(models.Model):
-    flight_no = models.IntegerField()
+    flight_id = models.IntegerField(primary_key=True)
     airline = models.ForeignKey(Airline,on_delete=models.CASCADE)
     dest_airport = models.ForeignKey(Airport, on_delete=models.CASCADE)
     fleet = models.ForeignKey(Fleet,on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6,decimal_places=2)
-
+    date = models.DateField(null=True)
+    
     def __str__(self):
         return self.airline.name + " | " + self.dest_airport.name
 
     class Meta:
-        unique_together = (("airline", "flight_no"),)
         db_table = "route"
+
+"""
+Customer
++   customer_id
+    first_name
+    last_name
+    DOB
+"""
+
+class Customer(models.Model):
+    customer_id = models.IntegerField(primary_key=True)
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    DOB = models.DateField()
+
+    def __str__(self):
+        return str(self.customer_id) + " | " + self.last_name + ", " + self.first_name
+
+    class Meta:
+        db_table = "customer"
+
+"""
+Passenger
++   seat_no
+-   customer_id
+-   flight_no
+    class
+"""
+
+class Passenger(models.Model):
+    seat_no = models.IntegerField()
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    flight = models.ForeignKey(Route,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.seat_no) + " | " + self.customer.last_name + ", " + self.customer.first_name
+
+    class Meta:
+        unique_together = (("flight","seat_no"),)
+        db_table = "passenger"
