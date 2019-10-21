@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-admin.site.site_header = 'sqlFire Admin'
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+admin.site.unregister(User)
+admin.site.unregister(Group)
+
+admin.site.site_header = 'sqlFire | Airline Management Simulator || Admin'
 admin.site.site_title = "| Fire"
 admin.site.index_title = "Admin"
 
